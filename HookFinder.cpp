@@ -21,9 +21,9 @@ VOID CheckJMP(char* name, DWORD* address, int numBytes) {
         if (*opcode == 0xE9) {
             printf("%s IS HOOKED   --->   ", name);
             printf("jmp detected at opcode: %d\n", i);
-           // printf("Next Instruction --> %x\n\n", *(opcode + 1));
-            opcode += 1;
+           // printf("Next Instruction --> %x\n\n", *(opcode + 1)); 
         }
+        opcode += 1;
     }
 
 
@@ -57,7 +57,7 @@ void DumpExports(HMODULE hLib, void* lib, int numBytes) {
 
     for (int i = 0; i < export_dir->NumberOfNames; i++) {
 
-      //  printf("CALLING %d\n", i);
+      // printf("CALLING %s\n", (LPCSTR)((BYTE*)lib + name[i]));
         CheckJMP((char*)lib + name[i], (DWORD*)GetProcAddress(hLib, (LPCSTR)((BYTE*)lib + name[i])), numBytes);
     }
 
